@@ -6,9 +6,6 @@ print_r($_POST);
 print_r($_FILES);
 
 
-foreach ($_FILES as $key => $value) {
-	print("$key = $value");
-}
 /*
 if(isSet($_FILES))
 {

@@ -6,6 +6,7 @@
         <title>Add New Part To Database</title>
         <script src="jquery.js"></script>
         <script src="jquery.validate.js"></script>
+        <script src="jquery.form.js"></script>
 
  <style type="text/css">
 * { font-family: Verdana; font-size: 96%; }
@@ -16,38 +17,33 @@ p { font-weight: bold; clear: both; }
 </style>
   <script>
   $(document).ready(function(){
-  	$("#customer").load('get_customer.php');
-    $("#adddrawing").validate();
+  	$("#customer").load('get_customer.php');  //load customer list from get_customer.php
+    $("#adddrawing").validate();  //attach validater to form
 
+var options = {  ///options for ajaxSubnit function 
+        target:        '#footer',   // target div id to update result of submit 
+//        success:       showResponse  // post-submit callback 
+        clearForm: true,        // clear all form fields after successful submit 
+        resetForm: true        // reset the form after successful submit 
+    };
 
 	$("#submit").click(function(event) {
 
 	 if($("#adddrawing").valid())
   	{
-  		
-  		var fdata=$('#adddrawing').serializeArray();
-  		var fname=$('#drg').val();
-  		console.log(fname);
+	  	event.preventDefault();  ///we are preventing the form submitting as we are using ajax to dynamically submitting
+	    $("#adddrawing").ajaxSubmit(options);
 
-  		event.preventDefault();
-/*		$.ajax({
-      					data: fdata,
-      					type: "POST",
-      					url: "add_part.php",
-      					success: function(html) {
-
-				document.getElementById("footer").innerHTML=html;
-				$('#adddrawing')[0].reset();
-      							}
-    							});*/
-  	
   	}
 
 		});
-
+		
+		
+ 
 
 
   });
+
   </script>
 
 
@@ -56,7 +52,7 @@ p { font-weight: bold; clear: both; }
     </head>
     <body>
 <div id="adraw">
-  <form class="cmxform" id="adddrawing" method="POST" target="add_part.php" enctype="multipart/form-data">
+  <form name ="adddrawing" id="adddrawing" action="add_part.php" method="POST" enctype="multipart/form-data">
  <fieldset>
 <legend>New Part Details</legend>
    <p>
