@@ -1,0 +1,143 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Add New Tool Description</title>
+        <script src="jquery.js"></script>
+        <script src="jquery.validate.js"></script>
+        <script src="jquery.form.js"></script>
+
+ <style type="text/css">
+* { font-family: Verdana; font-size: 12px; color: Green }
+label { width: 10em; float: left; }
+label.error { float: none; color: red; padding-left: .5em; vertical-align: top; }
+p { font-weight: bold; clear: both; }
+.submit { margin-left: 12em; }
+</style>
+  <script>
+  $(document).ready(function(){
+  	$("#tooltype").load('get_tool_types.php');  //load tool type list from get_tool_types.php
+  	$("#supplier").load('get_suppliers.php');  //load tool type list from get_supplierss.php
+    $("#tool").validate();//attach validater to form
+
+$.validator.addMethod("uselen_greater_fl", function(value, element) {
+    var usfl=$('#usel').val();
+    var fl=$('#tfl').val();
+    return  usfl>fl;
+}, "* Useful Length should be greater than Flute Length");
+
+$.validator.addMethod("oal_greater_usel", function(value, element) {
+    var fl=$('#tfl').val();
+    var usfl=$('#usel').val();
+    var oal=$('#oal').val();
+	if(usfl!=""){
+		return  oal>usfl;
+		}else
+		{
+			return  oal>fl;
+		}
+    
+}, "* Over All Length should be greater than Use full Length");
+
+$.validator.addClassRules({
+	required_uselen_greater_fl: {number:true, uselen_greater_fl:true},
+	required_oal_greater_usel: {number:true, oal_greater_usel:true}
+});
+
+	$("#submit").click(function(event) {
+
+	 if($("#tool").valid())
+  	{
+  		event.preventDefault();
+		$.ajax({
+      					data: $('#tool').serializeArray(),
+      					type: "POST",
+      					url: "add_tool_desc.php",
+      					success: function(html) {
+
+				document.getElementById("footer").innerHTML=html;
+				$('#tool')[0].reset();
+      							}
+    							});
+  	}
+		});
+  });
+
+
+
+
+
+  </script>
+
+
+
+
+    </head>
+    <body>
+  <form name ="tool" id="tool" >
+ <fieldset>
+<legend>New Tool Details</legend>
+   <p>
+     <label for="supplier">Supplier's Name</label>
+     <div id="supplier"></div>
+   </p>
+   <p>
+     <label for="tooltype">Tool Type</label>
+     <div id="tooltype"></div>
+   </p>
+   <p>
+     <label for="tdesc">Tool Description</label>
+     <input id="tdesc" name="tdesc" size="25"  class="required" />
+   </p>
+   <p>
+     <label for="tpno">Tool Part No.</label>
+     <input id="tpno" name="tpno" size="25" class="required"/>
+   </p>
+   <p>
+     <label for="tdia">Tool Diameter</label>
+     <input id="tdia" name="tdia" size="25"  class="required number" />
+   </p>
+
+   <p>
+     <label for="tcr">Corner Radius/Angle</label>
+     <input id="tcr" name="tcr" size="25"  class="number" />
+   </p>
+
+   <p>
+     <label for="tfl">Flute Length</label>
+     <input id="tfl" name="tfl" size="25"  class="number" />
+   </p>
+
+   <p>
+     <label for="oal">Over All Length </label>
+     <input id="oal" name="oal" type="text" class="required_oal_greater_usel" />
+   </p>
+
+   <p>
+     <label for="usel">Useful Length of Tool </label>
+     <input type="text" id="usel" name="usel" class="required_uselen_greater_fl"/>
+   </p>
+
+   <p>
+     <label for="nce">No of Cutting Edges </label>
+     <input type="text" id="nce" name="nce" class="number" max="10" class="required"/>
+   </p>
+
+
+   <p>
+     <label for="coating">Tool Coating </label>
+     <input type="text" id="coating" name="coating" />
+   </p>
+
+
+   <p>
+     <input class="submit" id="submit" type="submit" value="Submit"/>
+   </p>
+ </fieldset>
+ </form>
+<div id="footer"></div>
+
+
+</body>
+</html>

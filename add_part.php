@@ -5,10 +5,17 @@ mysql_select_db('Process',$cxn) or die("error opening db: ".mysql_error());
 $uploadDir = '/home/www/drawings/';
 //print_r($_POST);
 //print_r($_FILES);
+$custid=$_POST['Customer_ID'];
+$drawingno=$_POST['drawingno'];
+$componentname=$_POST['componentname'];
+if(isSet($_POST['mspec'])){$mspec=$_POST['mspec'];}else{$mspec="";}
+if(isSet($_POST['cblank'])){$cblank=$_POST['cblank'];}else{$cblank="";}
+if(isSet($_POST['pmblank'])){$pmblank=$_POST['pmblank'];}else{$pmblank="";}
+
 
 if(isSet($_FILES['drg']['name']))
 {
-	$drgfileName = $_FILES['drg']['name'];
+	$drgfileName = $drawingno."-".$_FILES['drg']['name'];
 	$drgtmpName = $_FILES['drg']['tmp_name'];
 	$drgfileSize = $_FILES['drg']['size'];
 	$drgfileType = $_FILES['drg']['type'];
@@ -29,7 +36,7 @@ if(isSet($_FILES['drg']['name']))
 
 if(isSet($_FILES['process']['name']))
 {
-	$profileName = $_FILES['process']['name'];
+	$profileName = $drawingno."-".$_FILES['process']['name'];
 	$protmpName = $_FILES['process']['tmp_name'];
 	$profileSize = $_FILES['process']['size'];
 	$profileType = $_FILES['process']['type'];
@@ -50,7 +57,7 @@ if(isSet($_FILES['process']['name']))
 
 if(isSet($_FILES['preview']['name']))
 {
-	$prefileName = $_FILES['preview']['name'];
+	$prefileName = $drawingno."-".$_FILES['preview']['name'];
 	$pretmpName = $_FILES['preview']['tmp_name'];
 	$prefileSize = $_FILES['preview']['size'];
 	$prefileType = $_FILES['preview']['type'];
@@ -70,12 +77,6 @@ if(isSet($_FILES['preview']['name']))
 }else{$prefileName='';}
 
 
-$custid=$_POST['Customer_ID'];
-$drawingno=$_POST['drawingno'];
-$componentname=$_POST['componentname'];
-if(isSet($_POST['mspec'])){$mspec=$_POST['mspec'];}else{$mspec="";}
-if(isSet($_POST['cblank'])){$cblank=$_POST['cblank'];}else{$cblank="";}
-if(isSet($_POST['pmblank'])){$pmblank=$_POST['pmblank'];}else{$pmblank="";}
 
 
 
@@ -99,14 +100,14 @@ $query.="VALUES('$custid',
 				'$profileName',
 				'$prefileName');";
 
-print($query);
+//print($query);
 
 $res=mysql_query($query) or die(mysql_error());
 
 $result=mysql_affected_rows();
 if($result!=0)
 {
-print("Added new Component $componentname");	
+print("Added new Component $componentname - $drawingno");	
 	
 }else
 	{
