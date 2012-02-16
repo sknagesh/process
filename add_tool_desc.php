@@ -13,9 +13,11 @@ $tdesc=$_POST['tdesc'];
 $tpno=$_POST['tpno'];
 $tdia=$_POST['tdia'];
 $tfl=$_POST['tfl'];
+$tmake=$_POST['tmake'];
 if(isSet($_POST['coating'])){$coating=$_POST['coating'];}else{$coating="";}
 if(isSet($_POST['tcr'])){$tcr=$_POST['tcr'];}else{$tcr="";}
 if(isSet($_POST['usel'])){$usel=$_POST['usel'];}else{$usel="";}
+if(isSet($_POST['sdia'])){$sdia=$_POST['sdia'];}else{$sdia="";}
 
 $query="INSERT INTO Tool (Supplier_ID,
 								Tool_Type,
@@ -27,6 +29,8 @@ $query="INSERT INTO Tool (Supplier_ID,
 								No_Of_Edges,
 								Tool_OAL,
 								Tool_Useful_Length,
+								Shank_Dia,
+								Tool_Make,
 								Tool_Coating) ";
 $query.="VALUES('$supid',
 				'$ttypeid',
@@ -38,6 +42,8 @@ $query.="VALUES('$supid',
 				'$nce',
 				'$oal',
 				'$usel',
+				'$sdia',
+				'$tmake',
 				'$coating');";
 
 //print($query);

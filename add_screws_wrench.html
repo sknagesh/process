@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Add Screws and Wrenches For Tool</title>
+        <script src="jquery.js"></script>
+        <script src="jquery.validate.js"></script>
+        <script src="jquery.form.js"></script>
+
+ <style type="text/css">
+* { font-family: Verdana; font-size: 12px; color: Green }
+label { width: 10em; float: left; }
+label.error { float: none; color: red; padding-left: .5em; vertical-align: top; }
+p { font-weight: bold; clear: both; }
+.submit { margin-left: 12em; }
+</style>
+  <script>
+  $(document).ready(function(){
+  	$("#toollist").load('get_inserted_tools.php');  //get list of tools with inserts from get_inserted_tools.php
+    $("#insert").validate();//attach validater to form
+	$('#toollist').click(function(){
+	var toolid=$('#Tool_ID').val();
+	var url='get_screws_for_tool_body.php?toolid='+toolid;
+  		$("#footer").load(url)
+  		});
+
+
+
+	$("#submit").click(function(event) {
+	 if($("#insert").valid())
+  	{
+  		event.preventDefault();
+		$.ajax({
+      					data: $('#insert').serializeArray(),
+      					type: "POST",
+      					url: "add_screw.php",
+      					success: function(html) {
+				document.getElementById("footer").innerHTML=html;
+				$('#insert')[0].reset();
+      							}
+    							});
+  	}
+		});
+  });
+
+
+
+
+
+  </script>
+
+
+
+
+    </head>
+    <body>
+  <form name ="insert" id="insert" >
+ <fieldset>
+<legend>New Insert Details</legend>
+   <p>
+     <label for="tool">Select Tool Body</label>
+     <div id="toollist"></div>
+   </p>
+   <p>
+     <label for="spno">Screw Part No with Grade</label>
+     <input id="spno" name="spno" size="25"  class="required" />
+   </p>
+
+   <p>
+     <label for="sdesc">Screw Description</label>
+     <input id="sdesc" name="sdesc" size="25"  class="required" />
+   </p>
+
+   <p>
+     <label for="wpno">Wrench/Key Part No</label>
+     <input id="wpno" name="wpno" size="25"  class="required" />
+   </p>
+
+   <p>
+     <label for="wdesc">Wrench/Key Description</label>
+     <input id="wdesc" name="wdesc" size="25"  />
+   </p>
+
+
+
+   <p>
+     <input class="submit" id="submit" type="submit" value="Submit"/>
+   </p>
+ </fieldset>
+ </form>
+<div id="footer"></div>
+
+
+</body>
+</html>
