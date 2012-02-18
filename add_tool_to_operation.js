@@ -1,7 +1,7 @@
   $(document).ready(function(){
 var tlist=new Array();
 var toolno=0;
-
+$('#added').hide();
   	$("#customer").load('get_customer.php');  //load customer list from get_customer.php
     $("#toolsoperation").validate();  //attach validater to form
 	$('#tooldia').hide();
@@ -40,7 +40,7 @@ var toolno=0;
 		}else
 		{
 			$('#tooldia').hide();
-			$('#tool').empty();
+			$('#tool').hide();
 		}
 		
   		});
@@ -49,6 +49,7 @@ var toolno=0;
 		var ttype=$('#Tool_Type_ID').val();
 		var tdia=$('#tdia').val();
 		var url='get_tool_of_type_dia.php?ttype='+ttype+'&tdia='+tdia;
+		$('#tool').show();
   		$("#tool").load(url)
   		$('#add').show();
   		});
@@ -57,14 +58,23 @@ var toolno=0;
 		
 		if($('#toolsoperation').valid())
 		{
-		var tid=$('#Tool_ID').val();
+		var tid1=$('#Tool_ID_1').val();
+		var tid2=$('#Tool_ID_2').val();
 		var hid=$('#Holder_ID').val();
 		var tdesc=$('#tdesc').val();
 		var toh=$('#toh').val();
-		tlist[toolno]=(tid,hid,tdesc,toh);
-		$('#tool').empty();
-			console.log("tlist["+toolno+"]="+tlist);
+		var tlife=$('#tlife').val();
+		if(tlife==""){tlife=0;}
+		tlist[toolno]=[tid1,tid2,hid,tdesc,toh,tlife];
+		var newtr="<tr><td>"+$('#Tool_ID_1 :selected').text()+"</td><td>"+$('#Tool_ID_2 :selected').text()+"</td><td>"+$('#Holder_ID :selected').text()+"</td><td>";
+		newtr+=tdesc+"</td><td>"+toh+"</td><td>"+tlife+"</td></tr>";
+		$('#tool').hide();
+		$('#tooldia').hide();
+		$('#added').append(newtr);
+		$('#added').show();
+			console.log(tlist[toolno]);
 		toolno+=1;
+		$('#add').hide();
 		}
 		
 		
@@ -74,6 +84,8 @@ var toolno=0;
 
 	 if($("#toolsoperation").valid())
   	{
+  		$('#addedtools').val(tlist);
+  		$('#nooftools').val(toolno);
   		event.preventDefault();
 		$.ajax({
       					data: $('#toolsoperation').serializeArray(),
@@ -83,6 +95,8 @@ var toolno=0;
 
 				document.getElementById("footer").innerHTML=html;
 				$('#toolsoperation')[0].reset();
+				toolno=0;
+				tlist=[];
       							}
     							});
   	}

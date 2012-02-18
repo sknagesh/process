@@ -26,12 +26,14 @@ p { font-weight: bold; clear: both; }
      <div id="customer"></div>
      <div id="drawing"></div>
      <div id="operation"></div>
+     <input type="hidden" id="addedtools" name="addedtools">
+     <input type="hidden" id="nooftools" name="nooftools">
 </fieldset>
 <fieldset><legend>Select Tool Search Criteria</legend>
 <div id="tooltype"></div>
 <div id="tooldia">
-		<label for="tdia">Enter Tool Diameter</label>
-    	<input type="text" id="tdia" name="tdia" size="10">
+		<p><label for="tdia">Enter Tool Diameter</label>
+    	<input type="text" id="tdia" name="tdia" size="10"></p>
 </div>
 <div id="tool"></div>
 <div id="add"><input type="button" id="add" value="Add Tool To List"></div>
@@ -42,7 +44,9 @@ p { font-weight: bold; clear: both; }
      <input class="submit" id="submit" type="submit" value="Submit"/>
    </p>
  </form>
-<div id="footer"></div>
+<table id="added" border="1px" cellspacing="2px" bgcolor="#D8BFD8">
+<tr><th>Prefered Tool</th><th>Alternate Tool</th><th>Holder</th><th>Machining Description</th><th>Tool Overhang</th><th>Tool Life</th></tr> <!--table to display currently added tools-->
+<div id="footer"></div> <!--div to display tools in the database-->
 
 </body>
 </html>
