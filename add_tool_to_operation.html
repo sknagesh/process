@@ -26,6 +26,10 @@ p { font-weight: bold; clear: both; }
      <div id="customer"></div>
      <div id="drawing"></div>
      <div id="operation"></div>
+		<div id="addedit"><input type="radio" name="add-edit" id="add-edit" value="add" class="required">Add</input>
+			<input type="radio" id="add-edit" name="add-edit" value="del" class="required">Delete</input>
+					
+		</div>
      <input type="hidden" id="addedtools" name="addedtools">
      <input type="hidden" id="nooftools" name="nooftools">
 </fieldset>
@@ -38,7 +42,7 @@ p { font-weight: bold; clear: both; }
 <div id="tool"></div>
 <div id="add"><input type="button" id="add" value="Add Tool To List"></div>
 </fieldset>
-
+<div id="del"></div>
 
    <p>
      <input class="submit" id="submit" type="submit" value="Submit"/>

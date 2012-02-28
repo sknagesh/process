@@ -2,6 +2,8 @@
 var tlist=new Array();
 var toolno=0;
 $('#added').hide();
+$('#addedit').hide();
+$('#del').hide();
   	$("#customer").load('get_customer.php');  //load customer list from get_customer.php
     $("#toolsoperation").validate();  //attach validater to form
 	$('#tooldia').hide();
@@ -19,18 +21,42 @@ $('#added').hide();
   		});
 
 		$('#operation').click(function(){  
+		$('#addedit').show();
+
+  		});
+
+		$('#addedit').click(function(){  
 		var opid=$('#Operation_ID').val();  //get selected opid
-		if(opid!="")
+		var adddel=$('#add-edit:checked').val();
+				if(opid!="")
 		{  //if an operation is selected show tool types and text field to enter diameter
-			$('#tooltype').load('get_tool_types.php');
+				if(adddel=="add")
+				{	
+					$('#tooltype').show();
+					$("#footer").show();
+					$('#del').hide();
+					$('#tooltype').load('get_tool_types.php');
+					var url='show_tool_list_for_op.php?opid='+opid;  //display already added tools for this operation
+  				$("#footer").load(url)
+				}else
+				if(adddel=="del")
+				{
+				$('#tooltype').empty();
+				$("#footer").empty();
+				$("#added").empty()
+				
+					var url='get_tool_list_for_op.php?opid='+opid;  //display already added tools for this operation
+  				$("#del").load(url)
+					$('#del').show();				
+				}
 		}else 
 		{  //if no operations are selected hide tool type and dia text field
 			$('#tooltype').empty();
 		}
 		
-		var url='show_tool_list_for_op.php?opid='+opid;  //display already added tools for this operation
-  		$("#footer").load(url)
   		});
+
+
 
 		$('#tooltype').click(function(){  //load operation list based on drawing
 		var ttype=$('#Tool_Type_ID').val();
@@ -95,6 +121,10 @@ $('#added').hide();
 
 				document.getElementById("footer").innerHTML=html;
 				$('#toolsoperation')[0].reset();
+				$('#tooltype').hide();
+				$("#footer").hide();
+				$("#added").hide();
+				$("#addedit").hide();
 				toolno=0;
 				tlist=[];
       							}
