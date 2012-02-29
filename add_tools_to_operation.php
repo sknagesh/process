@@ -9,7 +9,7 @@ if(isSet($_POST['addedtools'])){$addedtools=$_POST['addedtools'];}else{$addedtoo
 if(isSet($_POST['del'])){$del=$_POST['del'];}else{$del='';}
 $nooftools=$_POST['nooftools'];
 $adddel=$_POST['add-edit'];
-
+if(isSet($_POST['Insert_ID'])){$insertid=$_POST['Insert_ID'];}else{$insertid='';}
 if($adddel=='add')
 {
 	$tlist=explode(",", $addedtools);
@@ -19,6 +19,8 @@ if($adddel=='add')
 	while($j<$nooftools)
 	{
 		$Tool_ID_1[$j]=$tlist[$k];
+		$k++;
+		$Insert_ID[$j]=$tlist[$k];
 		$k++;
 		$Tool_ID_2[$j]=$tlist[$k];
 		$k++;
@@ -37,10 +39,10 @@ if($adddel=='add')
 		$toolsadded=0;
 		while($j<$nooftools	)
 		{
-			$query="INSERT INTO Ope_Tools (Operation_ID,Tool_ID_1,Tool_ID_2,Holder_ID,Ope_Tool_Desc,Ope_Tool_OH,Ope_Tool_Life) 
-			VALUES('$opid','$Tool_ID_1[$j]','$Tool_ID_2[$j]','$Holder_ID[$j]','$Ope_Tool_Desc[$j]','$Ope_Tool_OH[$j]','$Ope_Tool_Life[$j]');";
+			$query="INSERT INTO Ope_Tools (Operation_ID,Tool_ID_1,Ope_Insert_ID,Tool_ID_2,Holder_ID,Ope_Tool_Desc,Ope_Tool_OH,Ope_Tool_Life) 
+			VALUES('$opid','$Tool_ID_1[$j]','$Insert_ID[$j]','$Tool_ID_2[$j]','$Holder_ID[$j]','$Ope_Tool_Desc[$j]','$Ope_Tool_OH[$j]','$Ope_Tool_Life[$j]');";
 
-			//print($query);
+			print($query);
 
 			$res=mysql_query($query) or die(mysql_error());
 

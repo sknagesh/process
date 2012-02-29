@@ -9,12 +9,17 @@ $resa = mysql_query($query, $cxn) or die(mysql_error($cxn));
 print('<table name="ptable" id="ptable">');
 while ($row = mysql_fetch_assoc($resa))
 {
-	$dpath='/home/www/drawings/'.$row['Drawing_File'];
-	$ppath='/home/www/drawings/'.$row['Process_Sheet'];
-	print("<tr><td>Drawing</td><td><a href=\"$dpath\">$row[Drawing_File]</a></td></tr>");
-	print("<tr><td>Process Sheet</td><td><a href=\"$ppath\">$row[Process_Sheet]</a></td></tr>");
+	$dpath='/drawings/'.$row['Drawing_File'];
+	$ppath='/drawings/'.$row['Process_Sheet'];
+	print("<tr><td><label>Drawing</label></td><td><a href=\"$dpath\">$row[Drawing_File]</a></td></tr>");
+	print("<tr><td><label>Process Sheet</label></td><td><a href=\"$ppath\">$row[Process_Sheet]</a></td></tr>");
+	print("<tr><td><label>Cut Blank size</label></td><td>$row[Cut_Blank]</td></tr>");
+	print("<tr><td><label>Pre Machined Blank size</label></td><td>$row[Pre_Machined_Blank]</td></tr>");
+
 }
 print('</table>');
+
+
 
 
 ?>

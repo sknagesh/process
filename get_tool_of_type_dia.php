@@ -15,7 +15,7 @@ while ($row = mysql_fetch_assoc($resa))
 $st.="<option value=\"$row[Tool_ID]\">";
 $st.="$row[Tool_Part_NO] - $row[Tool_Desc]</option>";
 }
-$st.="</select></p>";
+$st.="</select><div id=\"insert\"></div></p>";
 
 $st.="<p><label>Select Alternate Tool</label>";
 $st.="<select name=\"Tool_ID_2\" id=\"Tool_ID_2\" >";

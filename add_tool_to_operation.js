@@ -85,13 +85,14 @@ $('#del').hide();
 		if($('#toolsoperation').valid())
 		{
 		var tid1=$('#Tool_ID_1').val();
+		var insid=$('#Insert_ID').val();
 		var tid2=$('#Tool_ID_2').val();
 		var hid=$('#Holder_ID').val();
 		var tdesc=$('#tdesc').val();
 		var toh=$('#toh').val();
 		var tlife=$('#tlife').val();
 		if(tlife==""){tlife=0;}
-		tlist[toolno]=[tid1,tid2,hid,tdesc,toh,tlife];
+		tlist[toolno]=[tid1,insid,tid2,hid,tdesc,toh,tlife];
 		var newtr="<tr><td>"+$('#Tool_ID_1 :selected').text()+"</td><td>"+$('#Tool_ID_2 :selected').text()+"</td><td>"+$('#Holder_ID :selected').text()+"</td><td>";
 		newtr+=tdesc+"</td><td>"+toh+"</td><td>"+tlife+"</td></tr>";
 		$('#tool').hide();
@@ -131,4 +132,17 @@ $('#del').hide();
     							});
   	}
 		});
+
+	$('#Tool_ID_1').live("click",function(){
+		var toolid=$(this).val();
+		var iurl='show_inserts_for_tool_body.php?toolid='+toolid;
+		$('#insert').load(iurl);
+		
+		
+	})
+
+
+
+
+
   });

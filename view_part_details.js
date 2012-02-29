@@ -12,13 +12,25 @@
 		var url='get_operations.php?drawingid='+drawingid;
   		$("#operation").load(url)
 		var purl='get_part_details.php?drawingid='+drawingid;
-$('#footer').load(purl);
-
+		$('#footer').load(purl);
+		var pdrw='show_part_preview.php?drawingid='+drawingid;
+		$('#pdrawing').load(pdrw);
   		});
 
 		$('#operation').click(function(){  
-
-
+		var opid=$('#Operation_ID').val();  //get selected opid
+		var url='show_tool_list_and_details_for_op.php?opid='+opid;  //display already added tools for this operation
+		$("#tlist").load(url)
+		$('#toolinfo').empty();;
   		});
+  		
+$('#tinfo').live("click",function(){
+	var toolid=$(this).val();
+	var url='get_tool_info.php?toolid='+toolid;
+$('#toolinfo').load(url);
+	
+	
+	
+});
 
   });
