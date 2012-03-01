@@ -62,6 +62,14 @@ $.validator.addClassRules({
     							});
   	}
 		});
+		
+	$('#tpno').blur(function(){
+		var partno=$(this).val();
+		var url = 'check_tool_part_no.php?partno='+partno;
+		$('#footer').load(url);
+	});	
+		
+		
   });
 
 

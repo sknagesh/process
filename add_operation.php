@@ -7,6 +7,7 @@ $opedesc=$_POST['opdesc'];
 if(isSet($_POST['ctime'])){$ctime=$_POST['ctime'];}else{$ctime="";}
 if(isSet($_POST['mtime'])){$mtime=$_POST['mtime'];}else{$mtime="";}
 if(isSet($_POST['fixtno'])){$fixtno=$_POST['fixtno'];}else{$fixtno="";}
+if(isSet($_POST['progno'])){$progno=$_POST['progno'];}else{$progno="";}
 
 if($ctime!="")
 {
@@ -25,12 +26,14 @@ $query="INSERT INTO Operation (Drawing_ID,
 								Operation_Desc,
 								Clamping_Time,
 								Machining_Time,
-								Fixture_NO) 
+								Fixture_NO,
+								Program_NO) 
 	 						VALUES('$drawid',
 									'$opedesc',
 									'$cltime',
 									'$mctime',
-									'$fixtno');";
+									'$fixtno',
+									'$progno');";
 
 //print($query);
 
