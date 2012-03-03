@@ -1,0 +1,54 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Add Tool To Stores</title>
+        <script src="jquery.js"></script>
+        <script src="jquery.validate.js"></script>
+        <script src="update_tool_qty.js"></script>
+ <style type="text/css">
+* { font-family: Verdana; font-size: 12px; color: Green }
+label { width: 10em; float: left; }
+label.error { float: none; color: red; padding-left: .5em; vertical-align: top; }
+p { font-weight: bold; clear: both; }
+.submit { margin-left: 12em; }
+</style>
+
+
+
+
+
+    </head>
+    <body>
+  <form name ="toolstore" id="toolstore" >
+ <fieldset>
+<legend>Add Tool to Stock OR With Draw From Stock?</legend>
+     <input type="radio" name="adddraw" id="addraw" value="add" checked="false" class="required"> Add New Tool To Stock</input>
+     <input type="radio" name="adddraw" id="addraw" value="withdraw" checked="false">With Draw From Stock</input>
+ </fieldset>
+ <fieldset>
+<legend>Select Tool Details</legend>
+    <div id="toollist"></div>
+	<div id="tdia">
+     <label for="tdia">Enter Tool Diameter</label>
+     <input id="tooldia" name="tooldia" size="25"  class="required number" />
+   </div>
+	<div id="tools"></div>
+	<div id="tqty">
+     <label for="toolqty">Enter Quantity</label>
+     <input id="toolqty" name="toolqty" size="25"  class="required number" />
+   </div>
+
+
+   <p>
+     <input class="submit" id="submit" type="submit" value="Submit"/>
+   </p>
+ </fieldset>
+ </form>
+<div id="qtyerror"></div>
+<div id="footer"></div>
+
+
+</body>
+</html>

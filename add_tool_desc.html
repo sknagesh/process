@@ -24,7 +24,7 @@ p { font-weight: bold; clear: both; }
 $.validator.addMethod("uselen_greater_fl", function(value, element) {
     var usfl=$('#usel').val();
     var fl=$('#tfl').val();
-    return  usfl>fl;
+    return  parseFloat(usfl)>parseFloat(fl);
 }, "* Useful Length should be greater than Flute Length");
 
 $.validator.addMethod("oal_greater_usel", function(value, element) {
@@ -32,10 +32,10 @@ $.validator.addMethod("oal_greater_usel", function(value, element) {
     var usfl=$('#usel').val();
     var oal=$('#oal').val();
 	if(usfl!=""){
-		return  oal>usfl;
+		return  parseFloat(oal)>parseFloat(usfl);
 		}else
 		{
-			return  oal>fl;
+			return  parseFloat(oal)>parseFloat(fl);
 		}
     
 }, "* Over All Length should be greater than Use full Length");
@@ -65,6 +65,7 @@ $.validator.addClassRules({
 		
 	$('#tpno').blur(function(){
 		var partno=$(this).val();
+		
 		var url = 'check_tool_part_no.php?partno='+partno;
 		$('#footer').load(url);
 	});	
