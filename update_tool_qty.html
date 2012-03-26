@@ -23,10 +23,18 @@ p { font-weight: bold; clear: both; }
     <body>
   <form name ="toolstore" id="toolstore" >
  <fieldset>
-<legend>Add Tool to Stock OR With Draw From Stock?</legend>
-     <input type="radio" name="adddraw" id="addraw" value="add" checked="false" class="required"> Add New Tool To Stock</input>
-     <input type="radio" name="adddraw" id="addraw" value="withdraw" checked="false">With Draw From Stock</input>
- </fieldset>
+<legend>Add Tool to Stock OR With Draw From Stock</legend>
+     <input type="radio" class="adddraw" name="adddraw" id="add" value="add" class="required"> Add New Tool To Stock
+     <input type="radio" class="adddraw" name="adddraw" id="withdraw" value="withdraw" >With Draw From Stock
+     <input type="radio" class="adddraw" name="adddraw" id="remove" value="remove" >Remove From shop Floor
+	 <input type="hidden" name="adddrw" id="adddrw" >
+<div id="resharp">
+     <input type="radio" class="resh" name="resh" id="resharpened" value="resharpened" class="required"> Resharpened Tool
+     <input type="radio" class="resh" name="resh" id="new" value="newtool" >New Tool
+     <input type="hidden" name="resha" id="resha" >
+</div>
+
+<div id="td">
  <fieldset>
 <legend>Select Tool Details</legend>
     <div id="toollist"></div>
@@ -39,10 +47,11 @@ p { font-weight: bold; clear: both; }
      <label for="toolqty">Enter Quantity</label>
      <input id="toolqty" name="toolqty" size="25"  class="required number" />
    </div>
-
+</div>
 
    <p>
      <input class="submit" id="submit" type="submit" value="Submit"/>
+     <input name="resetf" id="resetf" type="button" value="Reset"/>
    </p>
  </fieldset>
  </form>

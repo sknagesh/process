@@ -2,7 +2,11 @@
   	$("#toollist").load('get_tool_types.php');  //get list of tools with inserts from get_inserted_tools.php
    	$('#tdia').hide();
    	$('#tqty').hide();
-    $("#toolstore").validate();//attach validater to form
+   	$('#resharp').hide();
+	$('#td').hide();
+    $('#toolstore').validate();//attach validater to form
+	$('#submit').attr('disabled',true);
+
 	$('#toollist').click(function(){
 	
 	if($('#Tool_Type_ID').val()!='')
@@ -35,11 +39,36 @@
 
   		});
 	
+	$('input.adddraw').click(function(){
+		
+		$('#resharp').show();
+		$('#td').hide();
+		$('#resh').attr("checked",false);
+		$('#new').attr("checked",false);
+	});
+
+
+	$('input.resh').click(function(){
+		$('#td').show();
+		var action=$('input.adddraw:checked').val();
+		var resh=$('input.resh:checked').val();
+		$('#adddrw').val(action);
+		$('#resha').val(resh);
+		$('input.adddraw').attr('disabled',true);
+		$('input.resh').attr('disabled',true);
+		
+	});
+
+
+
 	$('#toolqty').keyup(function(){
 		var qty=$(this).val();
-		var action=$('#addraw:checked').val();
+		var action=$('input.adddraw:checked').val();
+		var resh=$('input.resh:checked').val();
 		var toolid=$('#Tool_ID_1').val();
-		if(action=="withdraw")
+console.log(action);
+console.log(resh);
+		if(action!="")
 		{
 		$.ajax({
       					data: $('#toolstore').serializeArray(),
@@ -47,17 +76,18 @@
       					url: "get_tool_qty.php",
       					async: true,
       					success: function(html) {
-				if(html!=1)
-				{
-					$('#qtyerror').text("Please enter Correct Quantity for WithDrawing");
-				}				
+					rdata=html.split("<|>");
+					$('#qtyerror').html(rdata[0]);
+					if(rdata[1]=="0")
+					{
+						$('#submit').attr('disabled',false);
+					}else
+					{
+						$('#submit').attr('disabled',true);
+					}
+				
       							}
     							});
-			
-			
-			
-		}else{
-					$('#qtyerror').text("Please Enter New Tool Quantity");
 		}
 		
 		
@@ -79,4 +109,18 @@
     							});
   	}
 		});
+
+
+	$('#resetf').click(function(){
+	
+	$('#toolstore')[0].reset();
+	$('input.adddraw').attr('disabled',false);
+	$('input.resh').attr('disabled',false);
+	$('#td').hide();
+	$('#resharp').hide();
+	$('#submit').attr('disabled',true);					
+	});
+
+
+
   });
