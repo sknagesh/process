@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>Add New Operation To Part</title>
+        <title>Update Part Details</title>
         <script src="jquery.js"></script>
         <script src="jquery.validate.js"></script>
         <script src="jquery.form.js"></script>
@@ -18,7 +18,8 @@ p { font-weight: bold; clear: both; }
   <script>
   $(document).ready(function(){
   	$("#customer").load('get_customer.php');  //load customer list from get_customer.php
-    $("#addoperation").validate();  //attach validater to form
+    $("#adddrawing").validate();  //attach validater to form
+	$('#partdetails').hide();	
 
 		$('#customer').click(function(){
 	var custid=$('#Customer_ID').val();
@@ -26,11 +27,11 @@ p { font-weight: bold; clear: both; }
   		$("#drawing").load(url)
   		});
 
-
 		$('#drawing').click(function(){
 	var drawingid=$('#Drawing_ID').val();
-	var url='show_operations_for_drawing.php?drawingid='+drawingid;
-  		$("#footer").load(url)
+	var url='get_part_details_for_update.php?drawingid='+drawingid;
+  		$("#partdetails").load(url)
+		$('#partdetails').show();
   		});
 
 
@@ -44,14 +45,18 @@ var options = {  ///options for ajaxSubnit function
 
 	$("#submit").click(function(event) {
 
-	 if($("#addoperation").valid())
+	 if($("#adddrawing").valid())
   	{
 	  	event.preventDefault();  ///we are preventing the form submitting as we are using ajax to dynamically submitting
-	    $("#addoperation").ajaxSubmit(options);
+	    $("#adddrawing").ajaxSubmit(options);
 
   	}
 
 		});
+		
+		
+ 
+
 
   });
 
@@ -62,50 +67,22 @@ var options = {  ///options for ajaxSubnit function
 
     </head>
     <body>
-  <form name ="addoperation" id="addoperation" action="add_operation.php" method="POST" enctype="multipart/form-data">
+<div id="adraw">
+  <form name ="adddrawing" id="adddrawing" action="update_part.php" method="POST" enctype="multipart/form-data">
  <fieldset>
-<legend>New Operation Details</legend>
+<legend>Enter Part Details</legend>
    <p>
      <label for="cname">Customer's Name</label>
      <div id="customer"></div>
-   <p>
      <div id="drawing"></div>
-   <p>
-     <label for="opdesc">Operation Description</label>
-     <input id="opdesc" name="opdesc" size="25" class="required"/>
-   </p>
-   <p>
-     <label for="ctime">Clamping Time in Mins.</label>
-     <input id="ctime" name="ctime" size="25"  class="number" />
-   </p>
-
-   <p>
-     <label for="mtime">Machining Time in Mins.</label>
-     <input id="mtime" name="mtime" size="25"  class="number" />
-   </p>
-
-   <p>
-     <label for="fno">Fixture Numbers</label>
-     <input id="fixtno" name="fixtno" size="25"  />
-   </p>
-
-   <p>
-     <label for="prno">Program No</label>
-     <input id="progno" name="progno" size="25"  />
-   </p>
-
-   <p>
-     <label for="drg">Select Setup Image </label>
-     <input id="oimg" name="oimg" type="file" />
-   </p>
-
-
+	<div id="partdetails"></div>
    <p>
      <input class="submit" id="submit" type="submit" value="Submit"/>
    </p>
  </fieldset>
  </form>
 <div id="footer"></div>
+</div>
 
 </body>
 </html>

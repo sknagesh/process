@@ -6,11 +6,12 @@ $uploadDir = '/home/www/drawings/';
 //print_r($_POST);
 //print_r($_FILES);
 $custid=$_POST['Customer_ID'];
-$drawingno=$_POST['drawingno'];
-$componentname=$_POST['componentname'];
-if(isSet($_POST['mspec'])){$mspec=$_POST['mspec'];}else{$mspec="";}
-if(isSet($_POST['cblank'])){$cblank=$_POST['cblank'];}else{$cblank="";}
-if(isSet($_POST['pmblank'])){$pmblank=$_POST['pmblank'];}else{$pmblank="";}
+$drawingid=$_POST['Drawing_ID'];
+$drawingno=$_POST['Drawing_NO'];
+$componentname="Component_Name=\"".$_POST['componentname']."\"";
+if(isSet($_POST['mspec'])){$mspec="Component_Material=\"".$_POST['mspec']."\"";}else{$mspec="";}
+if(isSet($_POST['cblank'])){$cblank="Cut_Blank=\"".$_POST['cblank']."\"";}else{$cblank="";}
+if(isSet($_POST['pmblank'])){$pmblank="Pre_Machined_Blank=\"".$_POST['pmblank']."\"";}else{$pmblank="";}
 
 
 if(isSet($_FILES['drg']['name']))
@@ -28,7 +29,7 @@ if(isSet($_FILES['drg']['name']))
 
 	if(!get_magic_quotes_gpc())
 						{
-						$drgfileName = addslashes($drgfileName);
+						$drgfileName = "Drawing_File=\"".addslashes($drgfileName)."\"";
 						$drgfilePath = addslashes($drgfilePath);
 						}
 
@@ -49,7 +50,7 @@ if(isSet($_FILES['process']['name']))
 
 	if(!get_magic_quotes_gpc())
 						{
-						$profileName = addslashes($profileName);
+						$profileName = "Process_Sheet=\"".addslashes($profileName)."\"";
 						$profilePath = addslashes($profilePath);
 						}
 
@@ -71,7 +72,7 @@ if(isSet($_FILES['gage']['name']))
 
 	if(!get_magic_quotes_gpc())
 						{
-						$gagefileName = addslashes($gagefileName);
+						$gagefileName = "Gage_List=\"".addslashes($gagefileName)."\"";
 						$drgfilePath = addslashes($drgfilePath);
 						}
 
@@ -93,50 +94,37 @@ if(isSet($_FILES['preview']['name']))
 
 	if(!get_magic_quotes_gpc())
 						{
-						$prefileName = addslashes($prefileName);
+						$prefileName = "Preview_Image=\"".addslashes($prefileName)."\"";
 						$prefilePath = addslashes($prefilePath);
 						}
 
 }else{$prefileName='';}
 
 
+$query="UPDATE Part set $componentname";
+						if($mspec!=''){$query.=",$mspec";}
+						if($cblank!=''){$query.=",$cblank";}
+						if($pmblank!=''){$query.=",$pmblank";}
+						if($drgfileName!=''){$query.=",$drgfileName";}
+						if($profileName!=''){$query.=",$profileName";}
+						if($gagefileName!=''){$query.=",$gagefileName";}
+						if($prefileName!=''){$query.=",$prefileName";}
+						$query.=" WHERE Drawing_ID=$drawingid;";
 
-
-
-
-$query="INSERT INTO Part (Customer_ID,
-								Drawing_NO,
-								Component_Name,
-								Component_Material,
-								Cut_Blank,
-								Pre_Machined_Blank,
-								Drawing_File,
-								Process_Sheet,
-								Preview_Image,
-								Gage_List) ";
-$query.="VALUES('$custid',
-				'$drawingno',
-				'$componentname',
-				'$mspec',
-				'$cblank',
-				'$pmblank',
-				'$drgfileName',
-				'$profileName',
-				'$prefileName',
-				'$gagefileName');";
 
 //print($query);
+
 
 $res=mysql_query($query) or die(mysql_error());
 
 $result=mysql_affected_rows();
 if($result!=0)
 {
-print("Added new Component $componentname - $drawingno");	
+print("Updated Component $componentname - $drawingno");	
 	
 }else
 	{
-		print("Error Adding");
+		print("Error Updating Part");
 	}
 
 

@@ -58,14 +58,14 @@ $row=mysql_fetch_assoc($res);
 		if($ttype=='newtool')
 			{
 				$shopq=$row['Qty_Shop_New']-$qty;
-				$reshq=$row['Qty_For_Resharp']+$qty;
-				$query="UPDATE Tool_Qty SET Qty_Shop_New=$shopq,Qty_For_Resharp=$reshq WHERE Tool_ID=$toolid;";		
+				$reshq=$row['Qty_Tool_Tray']+$qty;
+				$query="UPDATE Tool_Qty SET Qty_Shop_New=$shopq,Qty_Tool_Tray=$reshq WHERE Tool_ID=$toolid;";		
 		 	}else
 		if($ttype=='resharpened')
 			{
 				$shopq=$row['Qty_Shop_Resharp']-$qty;
-				$reshq=$row['Qty_For_Resharp']+$qty;
-				$query="UPDATE Tool_Qty SET Qty_Shop_Resharp=$shopq, Qty_For_Resharp=$reshq WHERE Tool_ID=$toolid;";
+				$reshq=$row['Qty_Tool_Tray']+$qty;
+				$query="UPDATE Tool_Qty SET Qty_Shop_Resharp=$shopq, Qty_Tool_Tray=$reshq WHERE Tool_ID=$toolid;";
 			}
 	
  		}else

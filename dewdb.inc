@@ -40,4 +40,15 @@ $h = (int)($m / 60); $m = $m % 60;
 return array($h, $m, $s);
 }
 
+
+function hms2mins($secs) {
+if ($secs<0) return false;
+$t=explode(":", $secs);
+$h=$t[0];
+$m = $t[1];
+$s = $t[2];
+$mins=$h*60+$m+$s/60;
+return $mins;
+}
+
 ?>

@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>Add New Operation To Part</title>
+        <title>Update Operation</title>
         <script src="jquery.js"></script>
         <script src="jquery.validate.js"></script>
         <script src="jquery.form.js"></script>
@@ -19,7 +19,7 @@ p { font-weight: bold; clear: both; }
   $(document).ready(function(){
   	$("#customer").load('get_customer.php');  //load customer list from get_customer.php
     $("#addoperation").validate();  //attach validater to form
-
+	$('#updateope').hide();
 		$('#customer').click(function(){
 	var custid=$('#Customer_ID').val();
 	var url='get_drawing.php?custid='+custid;
@@ -29,9 +29,18 @@ p { font-weight: bold; clear: both; }
 
 		$('#drawing').click(function(){
 	var drawingid=$('#Drawing_ID').val();
-	var url='show_operations_for_drawing.php?drawingid='+drawingid;
-  		$("#footer").load(url)
+	var url='get_operations.php?drawingid='+drawingid;
+  		$("#operation").load(url)
   		});
+
+		$('#operation').click(function(){
+	var opid=$('#Operation_ID').val();
+	var url='show_operation_for_update.php?opid='+opid;
+  		$("#updateope").load(url)
+		$('#updateope').show();
+  		});
+
+
 
 
 
@@ -62,42 +71,15 @@ var options = {  ///options for ajaxSubnit function
 
     </head>
     <body>
-  <form name ="addoperation" id="addoperation" action="add_operation.php" method="POST" enctype="multipart/form-data">
+  <form name ="addoperation" id="addoperation" action="update_operation.php" method="POST" enctype="multipart/form-data">
  <fieldset>
 <legend>New Operation Details</legend>
    <p>
      <label for="cname">Customer's Name</label>
      <div id="customer"></div>
-   <p>
      <div id="drawing"></div>
-   <p>
-     <label for="opdesc">Operation Description</label>
-     <input id="opdesc" name="opdesc" size="25" class="required"/>
-   </p>
-   <p>
-     <label for="ctime">Clamping Time in Mins.</label>
-     <input id="ctime" name="ctime" size="25"  class="number" />
-   </p>
-
-   <p>
-     <label for="mtime">Machining Time in Mins.</label>
-     <input id="mtime" name="mtime" size="25"  class="number" />
-   </p>
-
-   <p>
-     <label for="fno">Fixture Numbers</label>
-     <input id="fixtno" name="fixtno" size="25"  />
-   </p>
-
-   <p>
-     <label for="prno">Program No</label>
-     <input id="progno" name="progno" size="25"  />
-   </p>
-
-   <p>
-     <label for="drg">Select Setup Image </label>
-     <input id="oimg" name="oimg" type="file" />
-   </p>
+     <div id="operation"></div>
+     <div id="updateope"></div>
 
 
    <p>

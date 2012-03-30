@@ -3,25 +3,28 @@ include('dewdb.inc');
 $cxn = mysql_connect($dewhost,$dewname,$dewpswd) or die(mysql_error());
 mysql_select_db('Process',$cxn) or die("error opening db: ".mysql_error());
 $uploadDir = '/home/www/drawings/';
+$opid=$_POST['Operation_ID'];
 $drawid=$_POST['Drawing_ID'];
-$opedesc=$_POST['opdesc'];
+$opedesc="Operation_Desc=\"".$_POST['opdesc']."\"";
 if(isSet($_POST['ctime'])){$ctime=$_POST['ctime'];}else{$ctime="";}
 if(isSet($_POST['mtime'])){$mtime=$_POST['mtime'];}else{$mtime="";}
-if(isSet($_POST['fixtno'])){$fixtno=$_POST['fixtno'];}else{$fixtno="";}
-if(isSet($_POST['progno'])){$progno=$_POST['progno'];}else{$progno="";}
+if(isSet($_POST['fixtno'])){$fixtno="Fixture_NO=\"".$_POST['fixtno']."\"";}else{$fixtno="";}
+if(isSet($_POST['progno'])){$progno="Program_NO=\"".$_POST['progno']."\"";}else{$progno="";}
 
 if($ctime!="")
 {
 	$t=secs2hms($ctime*60);
-	$cltime=$t[0].':'.$t[1].':'.$t[2];
+	$cltime="Clamping_Time=\"".$t[0].':'.$t[1].':'.$t[2]."\"";
 }
 
 if($mtime!="")
 {
 	$t=secs2hms($mtime*60);
-	$mctime=$t[0].':'.$t[1].':'.$t[2];
+	$mctime="Machining_Time=\"".$t[0].':'.$t[1].':'.$t[2]."\"";
 
 }
+
+
 
 if(isSet($_FILES['oimg']['name']))
 {
@@ -38,34 +41,20 @@ if(isSet($_FILES['oimg']['name']))
 
 	if(!get_magic_quotes_gpc())
 						{
-						$drgfileName = addslashes($drgfileName);
+						$drgfileName = "Operation_Image=\"".addslashes($drgfileName)."\"";
 						$drgfilePath = addslashes($drgfilePath);
 						}
 
 }else{$drgfileName='';}
 
 
-
-
-
-
-
-
-
-$query="INSERT INTO Operation (Drawing_ID,
-								Operation_Desc,
-								Clamping_Time,
-								Machining_Time,
-								Fixture_NO,
-								Program_NO,
-								Operation_Image) 
-	 						VALUES('$drawid',
-									'$opedesc',
-									'$cltime',
-									'$mctime',
-									'$fixtno',
-									'$progno',
-									'$drgfileName');";
+$query="UPDATE Operation SET $opedesc ";
+if($cltime!=''){$query.=",$cltime";}
+if($mctime!=''){$query.=",$mctime";}
+if($fixtno!=''){$query.=",$fixtno";}
+if($progno!=''){$query.=",$progno";}
+if($drgfileName!=''){$query.=",$drgfileName";}
+$query.=" WHERE Operation_ID='$opid';";
 
 //print($query);
 
@@ -74,11 +63,11 @@ $res=mysql_query($query) or die(mysql_error());
 $result=mysql_affected_rows();
 if($result!=0)
 {
-print("Added new Operaton $opedesc");	
+print("Updated Operaton $opedesc");	
 	
 }else
 	{
-		print("Error Adding");
+		print("<BR>Error Updating Operation");
 	}
 
 

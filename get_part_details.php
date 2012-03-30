@@ -11,10 +11,12 @@ while ($row = mysql_fetch_assoc($resa))
 {
 	$dpath='/drawings/'.$row['Drawing_File'];
 	$ppath='/drawings/'.$row['Process_Sheet'];
-	print("<tr><td><label>Drawing</label></td><td><a href=\"$dpath\">$row[Drawing_File]</a></td></tr>");
-	print("<tr><td><label>Process Sheet</label></td><td><a href=\"$ppath\">$row[Process_Sheet]</a></td></tr>");
-	print("<tr><td><label>Cut Blank size</label></td><td>$row[Cut_Blank]</td></tr>");
-	print("<tr><td><label>Pre Machined Blank size</label></td><td>$row[Pre_Machined_Blank]</td></tr>");
+	$pinpath='/drawings/'.$row['Gage_List'];
+	print("<tr><td><label>Drawing</label></td><td height=\"35\"><a href=\"$dpath\">$row[Drawing_File]</a></td></tr>");
+	print("<tr><td><label>Process Sheet</label></td><td height=\"35\"><a href=\"$ppath\">$row[Process_Sheet]</a></td></tr>");
+	print("<tr><td><label>Pin and Gage List</label></td><td height=\"35\"><a href=\"$pinpath\">$row[Gage_List]</a></td></tr>");
+	print("<tr><td><label>Cut Blank size</label></td><td height=\"35\">$row[Cut_Blank]</td></tr>");
+	print("<tr><td><label>Pre Machined Blank size</label></td><td height=\"10\">$row[Pre_Machined_Blank]</td></tr>");
 
 }
 print('</table>');

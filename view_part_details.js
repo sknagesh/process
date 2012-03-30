@@ -20,6 +20,8 @@
 		$('#operation').click(function(){  
 		var opid=$('#Operation_ID').val();  //get selected opid
 		var url='show_tool_list_and_details_for_op.php?opid='+opid;  //display already added tools for this operation
+		var opimg='show_operation_image.php?opid='+opid;
+		$('#opimage').load(opimg);
 		$("#tlist").load(url)
 		$('#toolinfo').empty();;
   		});

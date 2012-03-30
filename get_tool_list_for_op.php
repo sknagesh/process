@@ -28,6 +28,6 @@ while($row=mysql_fetch_assoc($res))
 print("</table>");
 }
 else {
-	print("No Tools Added For this Drawing Yet");
+	print("No Tools Added For this Operation Yet");
 }
 ?>
