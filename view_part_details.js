@@ -35,4 +35,10 @@ $('#toolinfo').load(url);
 	
 });
 
+
+$("a[href*=.pdf]").click(function(){
+	window.open(this.href);
+	return false;
+});
+
   });
