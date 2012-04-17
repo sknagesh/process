@@ -42,14 +42,15 @@ if($adddel=='add')
 			$query="INSERT INTO Ope_Tools (Operation_ID,Tool_ID_1,Ope_Insert_ID,Tool_ID_2,Holder_ID,Ope_Tool_Desc,Ope_Tool_OH,Ope_Tool_Life) 
 			VALUES('$opid','$Tool_ID_1[$j]','$Insert_ID[$j]','$Tool_ID_2[$j]','$Holder_ID[$j]','$Ope_Tool_Desc[$j]','$Ope_Tool_OH[$j]','$Ope_Tool_Life[$j]');";
 
-			print($query);
+//			print($query);
 
 			$res=mysql_query($query) or die(mysql_error());
 
 			$result=mysql_affected_rows();
 			if($result!=0)
 				{
-					$toolsadded+=1;	
+					$toolsadded+=1;
+					
 	
 				}
 			$j++;

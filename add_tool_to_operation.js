@@ -123,9 +123,9 @@ $('#del').hide();
 				document.getElementById("footer").innerHTML=html;
 				$('#toolsoperation')[0].reset();
 				$('#tooltype').hide();
-				$("#footer").hide();
+//				$("#footer").hide();
 				$("#added").hide();
-				$("#addedit").hide();
+				$("#addedit").hide("");
 				toolno=0;
 				tlist=[];
       							}

@@ -16,9 +16,10 @@ print("<br><label>Fixture No:</label>$fno");
 print("<br><label>Clamping Time:</label>$ctime");
 print("<br><label>Machining Time:</label>$mtime");
 
-$query="SELECT Ope_Tool_ID,Tool_Part_NO,Tool_Desc,Ope_Insert_ID,Insert_Part_NO,Insert_Desc,Tool_Dia,Tool_ID_1,Ope_Tool_OH,Ope_Tool_Desc,Holder_Desc FROM Ope_Tools AS ot 
+$query="SELECT Ope_Tool_ID,t.Tool_Part_NO,t.Tool_Desc,tt.Tool_Part_NO as tpn2,tt.Tool_Desc as tde2,Ope_Insert_ID,Insert_Part_NO,Insert_Desc,t.Tool_Dia,Tool_ID_1,Tool_ID_2,Ope_Tool_OH,Ope_Tool_Desc,Holder_Desc FROM Ope_Tools AS ot 
 INNER JOIN Tool as t ON t.Tool_ID=ot.Tool_ID_1 
-left OUTER JOIN Inserts AS inse ON inse.Insert_ID=ot.Ope_Insert_ID
+LEFT OUTER JOIN Inserts AS inse ON inse.Insert_ID=ot.Ope_Insert_ID
+LEFT OUTER JOIN Tool as tt ON tt.Tool_ID=ot.Tool_ID_2 
 INNER JOIN Holder AS h ON h.Holder_ID=ot.Holder_ID
 WHERE ot.Operation_ID='$opid';";
 
@@ -37,12 +38,13 @@ $r=mysql_num_rows($res);
 if($r!=0)
 {
 print("<table border=\"1\" cellspacing=\"1\" >");
-print("<tr><th>Tool Info</th><th>Preferred Tool</th><th>Description</th><th>Insert</th><th>Holder</th><th>Tool Overhang</th></tr>");
+print("<tr><th>Tool Info</th><th>Preferred Tool/Alternate Tool</th><th>Description</th><th>Insert</th><th>Holder</th><th>Tool Overhang</th></tr>");
 while($row=mysql_fetch_assoc($res))
 {
-
+	$td=$row['Tool_Part_NO']." ".$row['Tool_Desc'];
+	if($row['tpn2']!=""){$td.="<font color=\"green\"> OR ".$row['tpn2']." ".$row['tde2']."</font>";}
 	print("<tr><td><input type=\"radio\" name=\"tinfo\" id=\"tinfo\" value=\"$row[Tool_ID_1]\"></input>
-	</td><td>$row[Tool_Part_NO] $row[Tool_Desc]</td><td>$row[Ope_Tool_Desc]</td>
+	</td><td>$td</td><td>$row[Ope_Tool_Desc]</td>
 	<td>$row[Insert_Part_NO] - $row[Insert_Desc]</td>
 	<td>$row[Holder_Desc]</td><td>$row[Ope_Tool_OH]</td></tr>");
 	
