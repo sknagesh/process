@@ -6,7 +6,7 @@ mysql_select_db('Process',$cxn) or die("error opening db: ".mysql_error());
 //print_r($_POST);
 $toolid=$_GET['toolid'];
 $query="SELECT 
-			Tool_Dia,Tool_FL,Shank_Dia,Tool_Corner_Rad,Tool_Useful_Length, Tool_OAL,Qty_Shop_New,Qty_Shop_Resharp
+			Tool_Dia,Tool_FL,Shank_Dia,Tool_Corner_Rad,Tool_Useful_Length, Tool_OAL,Qty_Shop_New,Tool_Remarks,Qty_Shop_Resharp
 			 FROM Tool AS t 
 			 LEFT OUTER JOIN Tool_Qty as tq ON tq.Tool_ID=t.Tool_ID
 			 WHERE t.Tool_ID='$toolid';";
@@ -22,7 +22,7 @@ $tufl=$row['Tool_Useful_Length'];
 $toal=$row['Tool_OAL'];
 $qsfnew=$row['Qty_Shop_New'];
 $qsfresh=$row['Qty_Shop_Resharp'];
-
+$tremark=$row['Tool_Remarks'];
 
 print("<table cellspacing=\"3\" cellpadding=\"5\">
 		<tr><th>Tool Dia</th><th>Shank Dia</th><th>Flute Length</th><th>Cr. Radius/Angle</th>
@@ -31,5 +31,8 @@ print("<tr><td>$tdia</td><td>$tshankdia</td><td>$tfl</td><td>$tcornerrad</td>
 			<td>$tufl</td><td>$toal</td><td align=\"center\">$qsfnew</td><td align=\"center\">$qsfresh</td>
 
 </tr></table>");
-
+if($tremark!='')
+{
+print("Tool Specific Remarks: $tremark");
+}
 ?>

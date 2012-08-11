@@ -41,7 +41,7 @@ print("<table border=\"1\" cellspacing=\"1\" >");
 print("<tr><th>Tool Info</th><th>Preferred Tool/Alternate Tool</th><th>Description</th><th>Insert</th><th>Holder</th><th>Tool Overhang</th></tr>");
 while($row=mysql_fetch_assoc($res))
 {
-	$td=$row['Tool_Part_NO']." ".$row['Tool_Desc'];
+	$td=$row['Tool_Desc']." (".$row['Tool_Part_NO'].")";
 	if($row['tpn2']!=""){$td.="<font color=\"green\"> OR ".$row['tpn2']." ".$row['tde2']."</font>";}
 	print("<tr><td><input type=\"radio\" name=\"tinfo\" id=\"tinfo\" value=\"$row[Tool_ID_1]\"></input>
 	</td><td>$td</td><td>$row[Ope_Tool_Desc]</td>
