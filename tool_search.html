@@ -34,6 +34,15 @@ p { font-weight: bold; clear: both; }
 		
 	});
 
+	$('#tdia').keyup(function(){
+		var ttypeid=$('#Tool_Type_ID').val();
+		var tdia=$('#tdia').val();
+		var url='get_all_tools_of_type.php?ttypeid='+ttypeid+'&tdia='+tdia;
+		$('#footer').load(url);
+		
+	});
+
+
   });
 
 
@@ -56,15 +65,15 @@ p { font-weight: bold; clear: both; }
 
    <p>
      <label for="inspno">Tool Type</label>
-     <div id="ttype"></div>
+     <div id="ttype"> </div>
 
    <p>
      <label for="tdia">Tool Diameter</label>
-     <input id="tdia" name="tdia" size="25"  />
+     <input id="tdia" name="tdia" size="25"  class="number"/>
    </p>
  </fieldset>
  </form>
-<div id="footer"></div>
+<div id="footer"> </div>
 
 
 </body>
