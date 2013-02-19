@@ -9,6 +9,7 @@ if(isSet($_POST['ctime'])){$ctime=$_POST['ctime'];}else{$ctime="";}
 if(isSet($_POST['mtime'])){$mtime=$_POST['mtime'];}else{$mtime="";}
 if(isSet($_POST['fixtno'])){$fixtno=$_POST['fixtno'];}else{$fixtno="";}
 if(isSet($_POST['progno'])){$progno=$_POST['progno'];}else{$progno="";}
+if(isSet($_POST['onote'])){$onote=$_POST['onote'];}else{$onote="";}
 
 if($ctime!="")
 {
@@ -45,6 +46,27 @@ if(isSet($_FILES['oimg']['name']))
 }else{$drgfileName='';}
 
 
+if(isSet($_FILES['odwg']['name']))
+{
+	$odrgfileName = $drawid."-".$_FILES['odwg']['name'];
+	$odrgtmpName = $_FILES['odwg']['tmp_name'];
+	$odrgfileSize = $_FILES['odwg']['size'];
+	$odrgfileType = $_FILES['odwg']['type'];
+	$odrgfilePath = $uploadDir . $odrgfileName;
+	$oresult = move_uploaded_file($odrgtmpName, $odrgfilePath);
+	if (!$oresult) {
+						echo "<br>Error uploading Operation Drawing $odrgfileName";
+						exit;
+						}
+
+	if(!get_magic_quotes_gpc())
+						{
+						$odrgfileName = addslashes($odrgfileName);
+						$odrgfilePath = addslashes($odrgfilePath);
+						}
+
+}else{$odrgfileName='';}
+
 
 
 
@@ -58,14 +80,17 @@ $query="INSERT INTO Operation (Drawing_ID,
 								Machining_Time,
 								Fixture_NO,
 								Program_NO,
-								Operation_Image) 
+								Operation_Image,
+								Operation_Notes,
+								Operation_Drawing) 
 	 						VALUES('$drawid',
 									'$opedesc',
 									'$cltime',
 									'$mctime',
 									'$fixtno',
 									'$progno',
-									'$drgfileName');";
+									'$drgfileName',
+									'$odrgfileName');";
 
 //print($query);
 
@@ -78,7 +103,7 @@ print("Added new Operaton $opedesc");
 	
 }else
 	{
-		print("Error Adding");
+		print("Error Adding Operation");
 	}
 
 

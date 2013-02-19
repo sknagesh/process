@@ -11,11 +11,15 @@ $rope=mysql_fetch_assoc($r);
 $ctime=$rope['Clamping_Time'];
 $mtime=$rope['Machining_Time'];
 $fno=$rope['Fixture_NO'];
-
-print("<br><label>Fixture No:</label>$fno");
-print("<br><label>Clamping Time:</label>$ctime");
-print("<br><label>Machining Time:</label>$mtime");
-
+$opnote=$rope['Operation_Notes'];
+$odpath='/drawings/'.$rope['Operation_Drawing'];
+print("<table>");
+print("<tr><td><label>Fixture No:</label></td><td>$fno</td></tr>");
+print("<tr><td><label>Clamping Time:</label></td><td>$ctime</td></tr>");
+print("<tr><td><label>Machining Time:</label></td><td>$mtime</td></tr>");
+print("<tr><td><label>Note:</label></td><td>$opnote</td></tr>");
+print("<tr><td><label>Operation Drawing</label></td><td><a href=\"$odpath\" target=\"_NEW\">$rope[Operation_Drawing]</a></td></tr>");
+print("</table>");
 $query="SELECT Ope_Tool_ID,t.Tool_Part_NO,t.Tool_Desc,tt.Tool_Part_NO as tpn2,tt.Tool_Desc as tde2,Ope_Insert_ID,Insert_Part_NO,Insert_Desc,t.Tool_Dia,Tool_ID_1,Tool_ID_2,Ope_Tool_OH,Ope_Tool_Desc,Holder_Desc FROM Ope_Tools AS ot 
 INNER JOIN Tool as t ON t.Tool_ID=ot.Tool_ID_1 
 LEFT OUTER JOIN Inserts AS inse ON inse.Insert_ID=ot.Ope_Insert_ID

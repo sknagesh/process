@@ -22,7 +22,9 @@ p { font-weight: bold; clear: both; }
 	$('#ttype').click(function(){
 		var ttypeid=$('#Tool_Type_ID').val();
 		var tdia=$('#tdia').val();
-		var url='get_all_tools_of_type.php?ttypeid='+ttypeid+'&tdia='+tdia;
+		var crnr=$('#crnr').val();
+		var fl=$('#fl').val();
+		var url='get_all_tools_of_type.php?ttypeid='+ttypeid+'&tdia='+tdia+'&crnr='+crnr+'&fl='+fl;
 		$('#footer').load(url);
 		
 	});
@@ -37,7 +39,30 @@ p { font-weight: bold; clear: both; }
 	$('#tdia').keyup(function(){
 		var ttypeid=$('#Tool_Type_ID').val();
 		var tdia=$('#tdia').val();
-		var url='get_all_tools_of_type.php?ttypeid='+ttypeid+'&tdia='+tdia;
+		var crnr=$('#crnr').val();
+		var fl=$('#fl').val();
+		var url='get_all_tools_of_type.php?ttypeid='+ttypeid+'&tdia='+tdia+'&crnr='+crnr+'&fl='+fl;
+		$('#footer').load(url);
+		
+	});
+
+
+	$('#crnr').keyup(function(){
+		var ttypeid=$('#Tool_Type_ID').val();
+		var tdia=$('#tdia').val();
+		var crnr=$('#crnr').val();
+		var fl=$('#fl').val();
+		var url='get_all_tools_of_type.php?ttypeid='+ttypeid+'&tdia='+tdia+'&crnr='+crnr+'&fl='+fl;
+		$('#footer').load(url);
+		
+	});
+
+	$('#fl').keyup(function(){
+		var ttypeid=$('#Tool_Type_ID').val();
+		var tdia=$('#tdia').val();
+		var crnr=$('#crnr').val();
+		var fl=$('#fl').val();
+		var url='get_all_tools_of_type.php?ttypeid='+ttypeid+'&tdia='+tdia+'&crnr='+crnr+'&fl='+fl;
 		$('#footer').load(url);
 		
 	});
@@ -71,6 +96,18 @@ p { font-weight: bold; clear: both; }
      <label for="tdia">Tool Diameter</label>
      <input id="tdia" name="tdia" size="25"  class="number"/>
    </p>
+
+   <p>
+     <label for="crnr">Corner Rad</label>
+     <input id="crnr" name="crnr" size="25"  class="number"/>
+   </p>
+
+   <p>
+     <label for="fl">Flute Length</label>
+     <input id="fl" name="fl" size="25"  class="number"/>
+   </p>
+
+
  </fieldset>
  </form>
 <div id="footer"> </div>

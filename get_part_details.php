@@ -22,7 +22,7 @@ while ($row = mysql_fetch_assoc($resa))
 	print("<tr><td><label>Drawing</label></td><td height=\"35\"><a href=\"$dpath\" target=\"_NEW\">$row[Drawing_File] </a></td></tr>");
 	print("<tr><td><label>Process Sheet</label></td><td height=\"35\"><a href=\"$ppath\" target=\"_NEW\">$row[Process_Sheet]</a></td></tr>");
 	print("<tr><td><label>Pin and Gage List</label></td><td height=\"35\"><a href=\"$pinpath\" target=\"_NEW\">$row[Gage_List]</a></td></tr>");
-	print("<tr><td><label>Total Clamping and Machining Time (h:m:s)</label></td><td height=\"35\">$cltime and $mctime</td></tr>");
+	print("<tr><td><label>Total Clamping Time and Machining Time (h:m:s)</label></td><td height=\"35\">$cltime and $mctime</td></tr>");
 	print("<tr><td><label>Cut Blank size</label></td><td height=\"35\">$row[Cut_Blank]</td></tr>");
 	print("<tr><td><label>Pre Machined Blank size</label></td><td height=\"10\">$row[Pre_Machined_Blank]</td></tr>");
 

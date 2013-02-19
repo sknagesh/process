@@ -10,6 +10,8 @@ if(isSet($_POST['ctime'])){$ctime=$_POST['ctime'];}else{$ctime="";}
 if(isSet($_POST['mtime'])){$mtime=$_POST['mtime'];}else{$mtime="";}
 if(isSet($_POST['fixtno'])){$fixtno="Fixture_NO=\"".$_POST['fixtno']."\"";}else{$fixtno="";}
 if(isSet($_POST['progno'])){$progno="Program_NO=\"".$_POST['progno']."\"";}else{$progno="";}
+if(isSet($_POST['onote'])){$onote="Operation_Notes=\"".$_POST['onote']."\"";}else{$onote="";}
+
 
 if($ctime!="")
 {
@@ -47,6 +49,26 @@ if(isSet($_FILES['oimg']['name']))
 
 }else{$drgfileName='';}
 
+if(isSet($_FILES['odwg']['name']))
+{
+	$odrgfileName = $drawid."-".$_FILES['odwg']['name'];
+	$odrgtmpName = $_FILES['odwg']['tmp_name'];
+	$odrgfileSize = $_FILES['odwg']['size'];
+	$odrgfileType = $_FILES['odwg']['type'];
+	$odrgfilePath = $uploadDir . $odrgfileName;
+	$oresult = move_uploaded_file($odrgtmpName, $odrgfilePath);
+	if (!$oresult) {
+						echo "<br>Error uploading Operation Drawing $odrgfileName";
+						exit;
+						}
+
+	if(!get_magic_quotes_gpc())
+						{
+						$odrgfileName = "Operation_Drawing=\"".addslashes($odrgfileName)."\"";
+						$odrgfilePath = addslashes($odrgfilePath);
+						}
+
+}else{$odrgfileName='';}
 
 $query="UPDATE Operation SET $opedesc ";
 if($cltime!=''){$query.=",$cltime";}
@@ -54,6 +76,8 @@ if($mctime!=''){$query.=",$mctime";}
 if($fixtno!=''){$query.=",$fixtno";}
 if($progno!=''){$query.=",$progno";}
 if($drgfileName!=''){$query.=",$drgfileName";}
+if($odrgfileName!=''){$query.=",$odrgfileName";}
+if($onote!=''){$query.=",$onote";}
 $query.=" WHERE Operation_ID='$opid';";
 
 //print($query);

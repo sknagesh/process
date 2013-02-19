@@ -16,7 +16,8 @@ $cltime=hms2mins($row['Clamping_Time']);
 $mtime=hms2mins($row['Machining_Time']);
 $fxtno=$row['Fixture_NO'];
 $opimg=$row['Operation_Image'];
-
+$opdwg=$row['Operation_Drawing'];
+$opnotes=$row['Operation_Notes'];
 
 print("<label for=\"opdesc\">Operation Description</label>
      <input id=\"opdesc\" name=\"opdesc\" size=\"25\" class=\"required\" value=\"$opdesc\"/>
@@ -42,9 +43,18 @@ print("<p>
   </p>");
 
 print("<p>
+     <label for=\"prno\">Operation Notes</label>
+     <textarea name=\"onote\" rows=\"4\" cols=\"50\" id=\"onote\" value=\"$opnotes\"> </textarea>
+      </p>");
+
+print("<p>
      <label for=\"drg\">Select Setup Image </label>
      <input id=\"oimg\" name=\"oimg\" type=\"file\" /> $opimg
   </p>");
 
+print("<p>
+     <label for=\"drg\">Select Operation Drawing </label>
+     <input id=\"odwg\" name=\"odwg\" type=\"file\" /> $opdwg
+  </p>");
 
 ?>

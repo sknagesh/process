@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Edit Tool Details</title>
+        <script src="jquery.js"></script>
+        <script src="jquery.validate.js"></script>
+        <script src="jquery.form.js"></script>
+
+ <style type="text/css">
+* { font-family: Verdana; font-size: 12px; color: Green }
+label { width: 10em; float: left; }
+label.error { float: none; color: red; padding-left: .5em; vertical-align: top; }
+p { font-weight: bold; clear: both; }
+.submit { margin-left: 12em; }
+</style>
+  <script>
+  $(document).ready(function(){
+  	$("#ttype").load('get_tool_types.php');  //get list of tools with inserts from get_inserted_tools.php
+
+	$('#ttype').click(function(){
+		var ttypeid=$('#Tool_Type_ID').val();
+		var tdia=$('#tdia').val();
+	if(ttypeid!="")
+		{
+		var url="get_tool_of_type_and_dia.php?ttype="+ttypeid+"&tdia="+tdia;
+		$('#tedit').load(url);
+		}
+	});
+
+
+	$('#tdia').keyup(function(){
+		var tdia=$(this).val();
+		var ttypeid=$('#Tool_Type_ID').val();
+	if(ttypeid!="")
+		{
+		var url="get_tool_of_type_and_dia.php?ttype="+ttypeid+"&tdia="+tdia;
+		$('#tlist').load(url);
+		}
+		
+	});
+
+	$('#tlist').click(function(){
+		var tid=$('#Tool_ID_1').val();
+	if(tid!="")
+		{
+		var url="view_tool_usage.php?tid="+tid;
+		$('#footer').load(url);
+		}
+	});
+
+
+
+  });
+
+
+
+
+
+  </script>
+
+
+
+
+    </head>
+    <body>
+  <form name ="tool" id="tool" >
+ <fieldset>
+<legend>Enter Search Criteria</legend>
+     <label for="inspno">Tool Type</label>
+     <div id="ttype"> </div>
+
+   <p>
+     <label for="tdia">Tool Diameter</label>
+     <input id="tdia" name="tdia" size="25"  />
+   </p>
+ <div id="tlist"> </div>
+
+ </fieldset>
+  </form>
+ 
+ <div id="footer"> </div>
+
+
+</body>
+</html>
