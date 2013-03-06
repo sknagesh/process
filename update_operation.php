@@ -11,6 +11,7 @@ if(isSet($_POST['mtime'])){$mtime=$_POST['mtime'];}else{$mtime="";}
 if(isSet($_POST['fixtno'])){$fixtno="Fixture_NO=\"".$_POST['fixtno']."\"";}else{$fixtno="";}
 if(isSet($_POST['progno'])){$progno="Program_NO=\"".$_POST['progno']."\"";}else{$progno="";}
 if(isSet($_POST['onote'])){$onote="Operation_Notes=\"".$_POST['onote']."\"";}else{$onote="";}
+if(isSet($_POST['ppath'])){$ppath="P_Path=\"".$_POST['ppath']."\"";}else{$ppath="";}
 
 
 if($ctime!="")
@@ -35,6 +36,10 @@ if(isSet($_FILES['oimg']['name']))
 	$drgfileSize = $_FILES['oimg']['size'];
 	$drgfileType = $_FILES['oimg']['type'];
 	$drgfilePath = $uploadDir . $drgfileName;
+if(file_exists($drgfilePath))
+{
+	unlink($drgfilePath);
+}
 	$result = move_uploaded_file($drgtmpName, $drgfilePath);
 	if (!$result) {
 						echo "<br>Error uploading Drawing $drgfileName";
@@ -56,6 +61,12 @@ if(isSet($_FILES['odwg']['name']))
 	$odrgfileSize = $_FILES['odwg']['size'];
 	$odrgfileType = $_FILES['odwg']['type'];
 	$odrgfilePath = $uploadDir . $odrgfileName;
+if(file_exists($odrgfilePath))
+{
+	unlink($odrgfilePath);
+}
+
+
 	$oresult = move_uploaded_file($odrgtmpName, $odrgfilePath);
 	if (!$oresult) {
 						echo "<br>Error uploading Operation Drawing $odrgfileName";
@@ -75,6 +86,7 @@ if($cltime!=''){$query.=",$cltime";}
 if($mctime!=''){$query.=",$mctime";}
 if($fixtno!=''){$query.=",$fixtno";}
 if($progno!=''){$query.=",$progno";}
+if($ppath!=''){$query.=",$ppath";}
 if($drgfileName!=''){$query.=",$drgfileName";}
 if($odrgfileName!=''){$query.=",$odrgfileName";}
 if($onote!=''){$query.=",$onote";}

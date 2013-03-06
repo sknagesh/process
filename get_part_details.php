@@ -14,19 +14,29 @@ $mctime=$rr['mt'];
 $query="SELECT * FROM Part WHERE Drawing_ID='$drawingid';";
 $resa = mysql_query($query, $cxn) or die(mysql_error($cxn));
 print('<table name="ptable" id="ptable">');
-while ($row = mysql_fetch_assoc($resa))
-{
+$row = mysql_fetch_assoc($resa);
+
 	$dpath='/drawings/'.$row['Drawing_File'];
 	$ppath='/drawings/'.$row['Process_Sheet'];
 	$pinpath='/drawings/'.$row['Gage_List'];
-	print("<tr><td><label>Drawing</label></td><td height=\"35\"><a href=\"$dpath\" target=\"_NEW\">$row[Drawing_File] </a></td></tr>");
-	print("<tr><td><label>Process Sheet</label></td><td height=\"35\"><a href=\"$ppath\" target=\"_NEW\">$row[Process_Sheet]</a></td></tr>");
-	print("<tr><td><label>Pin and Gage List</label></td><td height=\"35\"><a href=\"$pinpath\" target=\"_NEW\">$row[Gage_List]</a></td></tr>");
-	print("<tr><td><label>Total Clamping Time and Machining Time (h:m:s)</label></td><td height=\"35\">$cltime and $mctime</td></tr>");
-	print("<tr><td><label>Cut Blank size</label></td><td height=\"35\">$row[Cut_Blank]</td></tr>");
-	print("<tr><td><label>Pre Machined Blank size</label></td><td height=\"10\">$row[Pre_Machined_Blank]</td></tr>");
+	print("<tr><td height=\"35\"><a href=\"$dpath\" target=\"_NEW\" title=\"Opens Part Drawing in a new TAB\">Part Drawing</a></td>");
+	print("<td height=\"35\"><a href=\"$ppath\" target=\"_NEW\" title=\"Opens Process Sheet in a new TAB\">Process Sheet</a></td>");
+	
+	if($row['Gage_List']!='')
+	{
+		print("<td height=\"35\"><a href=\"$pinpath\" target=\"_NEW\"  title=\"Opens Pin and Gage List in a new TAB\">Pin and Gage List</a></td>");
+	}
+	print("</tr>");
+	print('</table>');
 
-}
+print('<table border=\"1\" cellspacing=\"1\">');
+
+	print("<tr><td><label>Total Clamping Time (h:m:s)</label></td><td height=\"55\">$cltime</td>
+			<td><label>Total Machining Time (h:m:s)</label></td><td height=\"35\">$mctime</td></tr>");
+	print("<tr><td><label>Cut Blank size</label></td><td height=\"35\">$row[Cut_Blank]</td>");
+	print("<td><label>Pre Machined Blank size</label></td><td height=\"10\">$row[Pre_Machined_Blank]</td></tr>");
+
+
 print('</table>');
 
 

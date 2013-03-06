@@ -9,6 +9,7 @@ if(isSet($_POST['ctime'])){$ctime=$_POST['ctime'];}else{$ctime="";}
 if(isSet($_POST['mtime'])){$mtime=$_POST['mtime'];}else{$mtime="";}
 if(isSet($_POST['fixtno'])){$fixtno=$_POST['fixtno'];}else{$fixtno="";}
 if(isSet($_POST['progno'])){$progno=$_POST['progno'];}else{$progno="";}
+if(isSet($_POST['ppath'])){$ppath=$_POST['ppath'];}else{$ppath="";}
 if(isSet($_POST['onote'])){$onote=$_POST['onote'];}else{$onote="";}
 
 if($ctime!="")
@@ -80,6 +81,7 @@ $query="INSERT INTO Operation (Drawing_ID,
 								Machining_Time,
 								Fixture_NO,
 								Program_NO,
+								P_Path,
 								Operation_Image,
 								Operation_Notes,
 								Operation_Drawing) 
@@ -89,7 +91,9 @@ $query="INSERT INTO Operation (Drawing_ID,
 									'$mctime',
 									'$fixtno',
 									'$progno',
+									'$ppath',
 									'$drgfileName',
+									'$onote',
 									'$odrgfileName');";
 
 //print($query);

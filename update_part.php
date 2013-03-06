@@ -21,7 +21,15 @@ if(isSet($_FILES['drg']['name']))
 	$drgfileSize = $_FILES['drg']['size'];
 	$drgfileType = $_FILES['drg']['type'];
 	$drgfilePath = $uploadDir . $drgfileName;
+	if(file_exists($drgfilePath))
+		{
+			unlink($drgfilePath);
+		}
+
+
+
 	$result = move_uploaded_file($drgtmpName, $drgfilePath);
+	chmod($drgfilePath, 777);
 	if (!$result) {
 						echo "<br>Error uploading Drawing $drgfileName";
 						exit;
@@ -42,7 +50,19 @@ if(isSet($_FILES['process']['name']))
 	$profileSize = $_FILES['process']['size'];
 	$profileType = $_FILES['process']['type'];
 	$profilePath = $uploadDir . $profileName;
+
+if(file_exists($profilePath))
+{
+print("File is there so unlinking");
+	chmod($profilePath, 777);
+	unlink($profilePath);
+	
+}
 	$result = move_uploaded_file($protmpName, $profilePath);
+	chmod($profilePath, 777);
+
+
+	
 	if (!$result) {
 						echo "<br>Error uploading Drawing $profileName";
 						exit;
@@ -64,7 +84,14 @@ if(isSet($_FILES['gage']['name']))
 	$drgfileSize = $_FILES['gage']['size'];
 	$drgfileType = $_FILES['gage']['type'];
 	$drgfilePath = $uploadDir . $gagefileName;
+		if(file_exists($drgfilePath))
+		{
+		unlink($drgfilePath);
+		}
+
+
 	$result = move_uploaded_file($drgtmpName, $drgfilePath);
+		chmod($drgfilePath, 777);
 	if (!$result) {
 						echo "<br>Error uploading Gage and Pin List $gagefileName";
 						exit;
@@ -86,7 +113,15 @@ if(isSet($_FILES['preview']['name']))
 	$prefileSize = $_FILES['preview']['size'];
 	$prefileType = $_FILES['preview']['type'];
 	$prefilePath = $uploadDir . $prefileName;
+
+		if(file_exists($prefilePath))
+		{
+			unlink($prefilePath);
+		}
+
+
 	$result = move_uploaded_file($pretmpName, $prefilePath);
+		chmod($prefilePath, 777);
 	if (!$result) {
 						echo "<br>Error uploading Drawing $prefileName";
 						exit;

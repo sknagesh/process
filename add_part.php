@@ -21,6 +21,7 @@ if(isSet($_FILES['drg']['name']))
 	$drgfileType = $_FILES['drg']['type'];
 	$drgfilePath = $uploadDir . $drgfileName;
 	$result = move_uploaded_file($drgtmpName, $drgfilePath);
+	chmod($drgfilePath, 777);
 	if (!$result) {
 						echo "<br>Error uploading Drawing $drgfileName";
 						exit;
@@ -42,6 +43,7 @@ if(isSet($_FILES['process']['name']))
 	$profileType = $_FILES['process']['type'];
 	$profilePath = $uploadDir . $profileName;
 	$result = move_uploaded_file($protmpName, $profilePath);
+		chmod($profilePath, 777);
 	if (!$result) {
 						echo "<br>Error uploading Drawing $profileName";
 						exit;
@@ -64,6 +66,7 @@ if(isSet($_FILES['gage']['name']))
 	$drgfileType = $_FILES['gage']['type'];
 	$drgfilePath = $uploadDir . $gagefileName;
 	$result = move_uploaded_file($drgtmpName, $drgfilePath);
+		chmod($drgfilePath, 777);
 	if (!$result) {
 						echo "<br>Error uploading Gage and Pin List $gagefileName";
 						exit;
@@ -86,6 +89,7 @@ if(isSet($_FILES['preview']['name']))
 	$prefileType = $_FILES['preview']['type'];
 	$prefilePath = $uploadDir . $prefileName;
 	$result = move_uploaded_file($pretmpName, $prefilePath);
+		chmod($prefilePath, 0777);
 	if (!$result) {
 						echo "<br>Error uploading Drawing $prefileName";
 						exit;

@@ -13,12 +13,24 @@ $mtime=$rope['Machining_Time'];
 $fno=$rope['Fixture_NO'];
 $opnote=$rope['Operation_Notes'];
 $odpath='/drawings/'.$rope['Operation_Drawing'];
-print("<table>");
-print("<tr><td><label>Fixture No:</label></td><td>$fno</td></tr>");
-print("<tr><td><label>Clamping Time:</label></td><td>$ctime</td></tr>");
-print("<tr><td><label>Machining Time:</label></td><td>$mtime</td></tr>");
+$ppath=$rope['P_Path'].$rope['Program_NO'];
+print("<table cellspacing=\"5\">");
+print("<tr><td><label>Fixture No:</label></td><td>$fno</td>");
+print("<td><label>Clamping Time For This OP:</label></td><td height=\"35\">$ctime</td>");
+print("<td><label>Machining Time for This OP:</label></td><td height=\"35\">$mtime</td></tr>");
 print("<tr><td><label>Note:</label></td><td>$opnote</td></tr>");
-print("<tr><td><label>Operation Drawing</label></td><td><a href=\"$odpath\" target=\"_NEW\">$rope[Operation_Drawing]</a></td></tr>");
+if($rope['Operation_Drawing']!='')
+{
+print("<tr><td><a href=\"$odpath\" target=\"_NEW\">Stage Drawing</a></td>");
+}
+if($rope['P_Path']!='')
+{
+print("<td><a href=\"$ppath\" target=\"_NEW\">NC Program</a></td></tr>");	
+}else{
+	print("<td><label>NC Program:</label> $rope[Program_NO]</td></tr>");
+}
+
+
 print("</table>");
 $query="SELECT Ope_Tool_ID,t.Tool_Part_NO,t.Tool_Desc,tt.Tool_Part_NO as tpn2,tt.Tool_Desc as tde2,Ope_Insert_ID,Insert_Part_NO,Insert_Desc,t.Tool_Dia,Tool_ID_1,Tool_ID_2,Ope_Tool_OH,Ope_Tool_Desc,Holder_Desc FROM Ope_Tools AS ot 
 INNER JOIN Tool as t ON t.Tool_ID=ot.Tool_ID_1 

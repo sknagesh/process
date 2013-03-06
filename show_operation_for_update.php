@@ -18,6 +18,7 @@ $fxtno=$row['Fixture_NO'];
 $opimg=$row['Operation_Image'];
 $opdwg=$row['Operation_Drawing'];
 $opnotes=$row['Operation_Notes'];
+$ppath=$row['P_Path'];
 
 print("<label for=\"opdesc\">Operation Description</label>
      <input id=\"opdesc\" name=\"opdesc\" size=\"25\" class=\"required\" value=\"$opdesc\"/>
@@ -41,6 +42,12 @@ print("<p>
      <label for=\"prno\">Program No</label>
      <input id=\"progno\" name=\"progno\" size=\"25\" value=\"$progno\"  />
   </p>");
+
+print("<p>
+     <label for=\"ppath\">Path To Program No</label>
+     <input id=\"ppath\" name=\"ppath\" size=\"25\" value=\"$ppath\"  />
+   </p>");
+
 
 print("<p>
      <label for=\"prno\">Operation Notes</label>
