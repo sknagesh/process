@@ -27,6 +27,7 @@ $row = mysql_fetch_assoc($resa);
 		print("<td height=\"35\"><a href=\"$pinpath\" target=\"_NEW\"  title=\"Opens Pin and Gage List in a new TAB\">Pin and Gage List</a></td>");
 	}
 	print("</tr>");
+	
 	print('</table>');
 
 print('<table border=\"1\" cellspacing=\"1\">');

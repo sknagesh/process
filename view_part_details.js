@@ -1,4 +1,5 @@
   $(document).ready(function(){
+	$('#footer2').hide();
   	$("#customer").load('get_customer.php');  //load customer list from get_customer.php
     $("#viewpart").validate();  //attach validater to form
 		$('#customer').click(function(){ ///load drawing list based on customer
@@ -15,6 +16,7 @@
 		$('#footer').load(purl);
 		var pdrw='show_part_preview.php?drawingid='+drawingid;
 		$('#pdrawing').load(pdrw);
+  		$('#footer2').show();
   		});
 
 		$('#operation').click(function(){  
@@ -31,9 +33,26 @@ $('#tinfo').live("click",function(){
 	var url='get_tool_info.php?toolid='+toolid;
 $('#toolinfo').load(url);
 	
-	
+
 	
 });
+
+
+
+$('#pdfexp').click(function(e){
+				var drawingid=$('#Drawing_ID').val();
+
+	e.preventDefault();
+		$.ajax({
+      					type: "GET",
+      					url: "export_tool_list_to_pdf.php?Drawing_ID="+drawingid,
+					
+
+			});
+
+
+});
+
 
 
 $("a[href*=.pdf]").click(function(){

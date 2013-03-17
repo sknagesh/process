@@ -6,6 +6,7 @@
         <title>View Part Details</title>
         <script src="jquery.js"></script>
         <script src="jquery.validate.js"></script>
+        <script src="jquery.form.js"></script>
         <script src="view_part_details.js"></script>
 
  <style type="text/css">
@@ -37,6 +38,8 @@ p { font-weight: bold; clear: both; }
 
     </head>
     <body>
+
+<form name="partview" id="partview" >
 <div id="cleft" float="left">
 	<div id="customer"></div>
 	<div id="drawing"></div>
@@ -44,7 +47,12 @@ p { font-weight: bold; clear: both; }
 	<div id="footer"></div>
 	<div id="tlist"></div>
 	<div id="toolinfo"></div>
+	<div id="footer2">
+		<input type="submit" id="pdfexp" value="Export Tool List To PDF">
+		</div>
+			<div id="footer3"></div>
 </div>
+</form>
  <div id="cright">
  	<div id="pdrawing" float="right"></div>
  	<div id="opimage" float="right"></div>
