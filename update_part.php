@@ -7,7 +7,9 @@ $uploadDir = '/home/www/drawings/';
 //print_r($_FILES);
 $custid=$_POST['Customer_ID'];
 $drawingid=$_POST['Drawing_ID'];
-$drawingno=$_POST['Drawing_NO'];
+
+$drawingno=$_POST['drawingno'];
+$dno="Drawing_NO=\"".$_POST['drawingno']."\"";
 $componentname="Component_Name=\"".$_POST['componentname']."\"";
 if(isSet($_POST['mspec'])){$mspec="Component_Material=\"".$_POST['mspec']."\"";}else{$mspec="";}
 if(isSet($_POST['cblank'])){$cblank="Cut_Blank=\"".$_POST['cblank']."\"";}else{$cblank="";}
@@ -136,7 +138,7 @@ if(isSet($_FILES['preview']['name']))
 }else{$prefileName='';}
 
 
-$query="UPDATE Part set $componentname";
+$query="UPDATE Part set $componentname, $dno";
 						if($mspec!=''){$query.=",$mspec";}
 						if($cblank!=''){$query.=",$cblank";}
 						if($pmblank!=''){$query.=",$pmblank";}

@@ -32,8 +32,8 @@ $row = mysql_fetch_assoc($resa);
 
 print('<table border=\"1\" cellspacing=\"1\">');
 
-	print("<tr><td><label>Total Clamping Time (h:m:s)</label></td><td height=\"55\">$cltime</td>
-			<td><label>Total Machining Time (h:m:s)</label></td><td height=\"35\">$mctime</td></tr>");
+//	print("<tr><td><label>Total Clamping Time (h:m:s)</label></td><td height=\"55\">$cltime</td>
+//			<td><label>Total Machining Time (h:m:s)</label></td><td height=\"35\">$mctime</td></tr>");
 	print("<tr><td><label>Cut Blank size</label></td><td height=\"35\">$row[Cut_Blank]</td>");
 	print("<td><label>Pre Machined Blank size</label></td><td height=\"10\">$row[Pre_Machined_Blank]</td></tr>");
 

@@ -19,7 +19,14 @@ $row = mysql_fetch_assoc($resa);
 	$cutblank=$row['Cut_Blank'];
 	$premblank=$row['Pre_Machined_Blank'];
 	$drgno=$row['Drawing_NO'];
+
 print("<p>
+     <label for=\"drawingno\">Drawing Number</label>
+     <input id=\"drawingno\" name=\"drawingno\" size=\"25\"  value=\"$dno\" class=\"required\" />
+   </p>");
+	
+	
+	print("<p>
      <label for=\"componentname\">Component Name</label>
      <input id=\"componentname\" name=\"componentname\" size=\"25\" class=\"required\" value=\"$pname\"/>
   </p>");

@@ -16,7 +16,11 @@
 		$('#footer').load(purl);
 		var pdrw='show_part_preview.php?drawingid='+drawingid;
 		$('#pdrawing').load(pdrw);
-  		$('#footer2').show();
+		
+var pdfurl="export_tool_list_to_pdf.php?Drawing_ID="+drawingid;		
+  		$('#footer2').load(pdfurl);
+	$('#footer2').show();
+	
   		});
 
 		$('#operation').click(function(){  
@@ -35,22 +39,6 @@ $('#toolinfo').load(url);
 	
 
 	
-});
-
-
-
-$('#pdfexp').click(function(e){
-				var drawingid=$('#Drawing_ID').val();
-
-	e.preventDefault();
-		$.ajax({
-      					type: "GET",
-      					url: "export_tool_list_to_pdf.php?Drawing_ID="+drawingid,
-					
-
-			});
-
-
 });
 
 

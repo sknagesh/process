@@ -74,7 +74,8 @@ $pdf->SetFont('Arial','',10);
 $q2="SELECT * FROM Operation WHERE Drawing_ID=$did;";
 
 $rr=mysql_query($q2) or die(mysql_error());
-
+$noofop=mysql_affected_rows();
+$pn=0;
 while($row=mysql_fetch_assoc($rr))
 {
 $pdf->SetFont('Arial','B',12);
@@ -103,6 +104,11 @@ $n=1;
 	$n+=1;
 		
 	}
+$pn+=1;
+if($pn!=$noofop)
+{
+	$pdf->AddPage('L');	
+}
 
 	
 	
@@ -110,8 +116,10 @@ $n=1;
 }
 
 
-		$name="$Drawing_NO"."_Tool_List.pdf";
+		$name="pdf/$Drawing_NO"."_Tool_List.pdf";
 		ob_clean();
 		$pdf->Output($name,'F');
+	
+	print("<a href=\"$name\" target=\"_NEW\" title=\"Opens Tool List PDF File TAB\">Tool List in PDF</a>");
 		
 ?>

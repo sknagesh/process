@@ -15,9 +15,9 @@ $opnote=$rope['Operation_Notes'];
 $odpath='/drawings/'.$rope['Operation_Drawing'];
 $ppath=$rope['P_Path'].$rope['Program_NO'];
 print("<table cellspacing=\"5\">");
-print("<tr><td><label>Fixture No:</label></td><td>$fno</td>");
-print("<td><label>Clamping Time For This OP:</label></td><td height=\"35\">$ctime</td>");
-print("<td><label>Machining Time for This OP:</label></td><td height=\"35\">$mtime</td></tr>");
+print("<tr><td><label>Fixture No:</label></td><td>$fno</td></tr>");
+//print("<td><label>Clamping Time For This OP:</label></td><td height=\"35\">$ctime</td>");
+//print("<td><label>Machining Time for This OP:</label></td><td height=\"35\">$mtime</td></tr>");
 print("<tr><td><label>Note:</label></td><td>$opnote</td></tr>");
 if($rope['Operation_Drawing']!='')
 {
